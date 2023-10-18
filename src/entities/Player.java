@@ -35,6 +35,9 @@ public class Player extends Entity{
     private float fallSpeedAC = 0.3f *Game.SCALE;
     private boolean inAir = true;
     
+    //Flip
+    private int flipX = 0;
+    private int flipW = 1;
     
     private  int[][] lvlData;
 
@@ -49,17 +52,19 @@ public class Player extends Entity{
         setAnimation();
         
     }
-    public void render(Graphics g){
-        
-        g.drawImage(ani[playerAction][aniIndex], (int) (hitbox.x - xDrawOffSet), (int) (hitbox.y - yDrawOffSet), width, height, null);
-//        drawHitBox(g);
-    }
-    
+
+    	public void render(Graphics g, int lvlOffset) {
+            if(playerAction==ATTACK_2 && aniIndex==6)
+             g.drawImage(ani[playerAction][aniIndex], (int) (hitbox.x - xDrawOffSet) - lvlOffset+ flipX, (int) (hitbox.y - yDrawOffSet), (width+128)*flipW, height, null);
+            else     
+             g.drawImage(ani[playerAction][aniIndex], (int) (hitbox.x - xDrawOffSet) - lvlOffset + flipX, (int) (hitbox.y - yDrawOffSet), width * flipW, height, null);
+//          drawHitbox(g);
+	}
     private void LoadAnimation() {
         InputStream idle = getClass().getResourceAsStream("/res/Idle.png");
         InputStream run = getClass().getResourceAsStream("/res/Run.png");
         InputStream atk_1 = getClass().getResourceAsStream("/res/Attack_2.png");
-        InputStream atk_2 = getClass().getResourceAsStream("/res/Attack_3.png");
+        InputStream atk_2 = getClass().getResourceAsStream("/res/Attack_3_1.png");
         InputStream jump = getClass().getResourceAsStream("/res/Jump.png");
         try {
            imgIdle = ImageIO.read(idle);
@@ -85,9 +90,10 @@ public class Player extends Entity{
             for(int i = 0 ; i < 4; i++){
                 ani[ATTACK_1][i] = imgAtk_1.getSubimage(i*128,0,128,128);
             }
-            for(int i = 0 ; i < 7; i++){
+            for(int i = 0 ; i < 6; i++){
                 ani[ATTACK_2][i] = imgAtk_2.getSubimage(i*128,0,128,128);
             }
+             ani[ATTACK_2][6] = imgAtk_2.getSubimage(6*128,0,128+128,128);
             //End Attack
             //Jump
             for(int i = 0 ; i < 6; i++){
@@ -122,17 +128,25 @@ public class Player extends Entity{
     private void updatePos() {
 		moving = false;
 
-		if (jump)
+		if (jump && !attack_2 )
 			jump();
 		if (!left && !right && !inAir)
 			return;
-
+                if (left && right && !inAir)
+			return;
 		float xSpeed = 0;
 
-		if (left)
-			xSpeed -= playerSpeed;
-		if (right)
-			xSpeed += playerSpeed;
+		if (left && !attack_2 ){
+                        xSpeed -= playerSpeed;
+			flipX = width;
+			flipW = -1;
+                }
+		if (right && !attack_2 ){
+                        xSpeed += playerSpeed;
+			flipX = 0;
+			flipW = 1;
+
+                }
 
 		if (!inAir)
 			if (!IsEntityOnFloor(hitbox, lvlData))
@@ -187,6 +201,7 @@ public class Player extends Entity{
     }
     public void setAttack_2(boolean attacking){
         this.attack_2=attacking;
+
     }
     
     private void resetAniTick() {

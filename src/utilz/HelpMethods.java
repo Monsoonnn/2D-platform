@@ -1,8 +1,9 @@
 package utilz;
 
+import RPGgame.Game;
 import java.awt.geom.Rectangle2D;
 
-import RPGgame.*;
+
 
 public class HelpMethods {
 
@@ -16,11 +17,11 @@ public class HelpMethods {
 	}
 
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
-		if (x < 0 || x >= Game.GAME_WIDTH)
+		int maxWidth = lvlData[0].length * Game.TILES_SIZE;
+		if (x < 0 || x >= maxWidth)
 			return true;
 		if (y < 0 || y >= Game.GAME_HEIGHT)
 			return true;
-
 		float xIndex = x / Game.TILES_SIZE;
 		float yIndex = y / Game.TILES_SIZE;
 
@@ -44,12 +45,12 @@ public class HelpMethods {
 	}
 
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
-		float currentTile = (int) (hitbox.y / Game.TILES_SIZE);
+		int currentTile = (int) (hitbox.y / Game.TILES_SIZE);
 		if (airSpeed > 0) {
-			//Falling - touching floor
-			float tileYPos = currentTile * Game.TILES_SIZE;
-			float yOffset = (int) (Game.TILES_SIZE - hitbox.height);
-			return tileYPos + yOffset + Game.TILES_SIZE -1  ;
+			// Falling - touching floor
+			int tileYPos = currentTile * Game.TILES_SIZE;
+			int yOffset = (int) (Game.TILES_SIZE - hitbox.height);
+			return tileYPos + yOffset + Game.TILES_SIZE - 1;
 		} else
 			// Jumping
 			return currentTile * Game.TILES_SIZE;

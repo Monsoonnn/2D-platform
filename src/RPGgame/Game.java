@@ -2,6 +2,9 @@
 package RPGgame;
 
 import Levels.LevelManager;
+import States.Gamestate;
+import States.Menu;
+import States.Playing;
 import entities.Player;
 import entities.*;
 import java.awt.Graphics;
@@ -13,6 +16,9 @@ public class Game implements Runnable{
     private final int FPS_SET = 120;
     private final int UPS_SET = 200;
     private Player player;
+    
+    private Playing playing;
+    private Menu menu;
     
     private LevelManager levelManager;
     
@@ -32,9 +38,8 @@ public class Game implements Runnable{
         startGameLoop();
     }
     private void init() {
-        levelManager = new LevelManager(this);
-        player = new Player(200, 200,128,128);
-        player.loadLevelData(levelManager.getLevel().getLevelData());
+        menu = new Menu(this);
+	playing = new Playing(this);
     }
         
     private void startGameLoop(){
@@ -43,12 +48,32 @@ public class Game implements Runnable{
     }
     
     public void update() {
-        player.update();
-        levelManager.update();
+        switch (Gamestate.state) {
+		case MENU:
+			menu.update();
+			break;
+		case PLAYING:
+			playing.update();
+			break;
+		case OPTIONS:
+		case QUIT:
+		default:
+			System.exit(0);
+			break;
+
+		}
     }
     public void render(Graphics g){
-       levelManager.draw(g);
-       player.render(g);
+                switch (Gamestate.state) {
+		case MENU:
+			menu.draw(g);
+			break;
+		case PLAYING:
+			playing.draw(g);
+			break;
+		default:
+			break;
+		}
        
     }
         @Override
@@ -95,11 +120,17 @@ public class Game implements Runnable{
 
 	}        
         
-    public void windowLostFocus(){
-        player.resetPosBoolean();
-    }
-    public Player getPlayer(){
-        return player;
-    }
+    public void windowFocusLost() {
+		if (Gamestate.state == Gamestate.PLAYING)
+			playing.getPlayer().resetPosBoolean();
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public Playing getPlaying() {
+		return playing;
+	}
     
 }

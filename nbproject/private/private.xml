@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Player.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/Playing.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/LoadSave.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/RPGgame/Game.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/HelpMethods.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/State.java</file>
         </group>
     </open-files>
 </project-private>
