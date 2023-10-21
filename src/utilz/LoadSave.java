@@ -13,7 +13,8 @@ import RPGgame.Game;
 public class LoadSave {
     
 	public static final String LEVEL_ATLAS = "tileset.png";
-	public static final String LEVEL_ONE_DATA = "map/stage3.png";
+	public static final String LEVEL_ONE_DATA = "map/stage9test.png";
+        public static final String MENU_BUTTONS = "button_atlas.png";
 //        public static final String LEVEL_ONE_DATA = "level_one_data_long.png";
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;

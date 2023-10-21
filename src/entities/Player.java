@@ -128,8 +128,11 @@ public class Player extends Entity{
     private void updatePos() {
 		moving = false;
 
-		if (jump && !attack_2 )
-			jump();
+		if (jump && !attack_2 ){
+                    jump();
+                    jump = false;
+                }
+			
 		if (!left && !right && !inAir)
 			return;
                 if (left && right && !inAir)
@@ -240,7 +243,7 @@ public class Player extends Entity{
         if(attack_1){
             playerAction = ATTACK_1;
         }
-        else if(attack_2){
+        else if(attack_2 && !inAir){
             playerAction = ATTACK_2;
         }
         if(startAni != playerAction){

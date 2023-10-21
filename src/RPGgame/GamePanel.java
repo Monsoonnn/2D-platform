@@ -32,6 +32,7 @@ public class GamePanel extends JPanel{
         addMouseListener(mouseIP);
         addMouseMotionListener(mouseIP);
         
+        
     }
     public void importImg(){    
     }

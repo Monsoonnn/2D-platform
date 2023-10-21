@@ -11,12 +11,15 @@ public class GameWindow extends JFrame{
     private JFrame jframe;
     public GameWindow(GamePanel gamePanel) {
         jframe = new JFrame();
+        jframe.setTitle("Journey");
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gamePanel);
-        jframe.setLocation(150,75);
         jframe.setResizable(false);
         jframe.pack();
+        jframe.setLocationRelativeTo(null);
+        
+        
    
         jframe.addWindowFocusListener(new WindowFocusListener(){
             @Override

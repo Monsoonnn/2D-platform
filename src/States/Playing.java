@@ -35,7 +35,6 @@ public class Playing extends State implements Statemethods {
         private void checkCloseToBorder() {
 		int playerX = (int) player.getHitBox().x;
 		int diff = playerX - xLvlOffset;
-
 		if (diff > rightBorder)
 			xLvlOffset += diff - rightBorder;
 		else if (diff < leftBorder)
@@ -129,7 +128,7 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       
     }
 
     
