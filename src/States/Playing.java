@@ -4,6 +4,7 @@ package States;
 
 import Levels.LevelManager;
 import RPGgame.Game;
+import UI.PauseOverlay;
 import entities.Player;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,10 @@ public class Playing extends State implements Statemethods {
 	private int lvlTilesWide = LoadSave.GetLevelData()[0].length;
 	private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
 	private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
+        
+        private boolean paused = false;
+        private boolean replay = false;
+        private PauseOverlay pauseOverlay;
 
 	public Playing(Game game) {
 		super(game);
@@ -30,8 +35,12 @@ public class Playing extends State implements Statemethods {
 		levelManager = new LevelManager(game);
 		player = new Player(200, 200,128,128);
 		player.loadLevelData(levelManager.getLevel().getLevelData());
-
+                pauseOverlay = new PauseOverlay(this);
 	}
+        
+        public void respawnPlayer(){
+            player.resetAll();
+        }
         private void checkCloseToBorder() {
 		int playerX = (int) player.getHitBox().x;
 		int diff = playerX - xLvlOffset;
@@ -48,16 +57,21 @@ public class Playing extends State implements Statemethods {
 	}
 	@Override
 	public void update() {
-		levelManager.update();
-		player.update();
-                checkCloseToBorder();
-
+		if (!paused) {
+			levelManager.update();
+			player.update();
+                        checkCloseToBorder();
+		} else {
+			pauseOverlay.update();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		levelManager.draw(g, xLvlOffset);
 		player.render(g, xLvlOffset);
+                if (paused)
+			pauseOverlay.draw(g);
 	}
 
 	
@@ -75,7 +89,7 @@ public class Playing extends State implements Statemethods {
 			player.setJump(true);
 			break;
 		case KeyEvent.VK_ESCAPE:
-			Gamestate.state = Gamestate.MENU;
+			paused = !paused;
 			break;
                 case KeyEvent.VK_J:
                         player.setAttack_1(true);
@@ -102,19 +116,26 @@ public class Playing extends State implements Statemethods {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (paused)
+			pauseOverlay.mousePressed(e);
 
+	}
+        public void mouseDragged(MouseEvent e) {
+		if (paused)
+			pauseOverlay.mouseDragged(e);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (paused)
+			pauseOverlay.mouseReleased(e);
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (paused)
+			pauseOverlay.mouseMoved(e);
 
 	}
 
@@ -125,11 +146,16 @@ public class Playing extends State implements Statemethods {
 	public Player getPlayer() {
 		return player;
 	}
+        
+        public void unpauseGame() {
+		paused = false;
+	}
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-       
-    }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+
+        }
+
 
     
 

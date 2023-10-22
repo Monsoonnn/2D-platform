@@ -2,9 +2,11 @@
 package RPGgame;
 
 import Levels.LevelManager;
+import States.GameSetting;
 import States.Gamestate;
 import States.Menu;
 import States.Playing;
+import UI.AudioSetings;
 import entities.Player;
 import entities.*;
 import java.awt.Graphics;
@@ -19,7 +21,8 @@ public class Game implements Runnable{
     
     private Playing playing;
     private Menu menu;
-    
+    private AudioSetings audio;
+    private GameSetting gameSetting;
     private LevelManager levelManager;
     
     public final static int TILES_DEFAULT_SIZE = 32;
@@ -38,15 +41,19 @@ public class Game implements Runnable{
         startGameLoop();
     }
     private void init() {
+        audio = new AudioSetings();
         menu = new Menu(this);
 	playing = new Playing(this);
+        gameSetting = new GameSetting(this);
     }
         
     private void startGameLoop(){
         gameThread = new Thread(this);
         gameThread.start();
     }
-    
+    private void rePlay(){
+        playing = new Playing(this);
+    }
     public void update() {
         switch (Gamestate.state) {
 		case MENU:
@@ -56,8 +63,8 @@ public class Game implements Runnable{
                     playing.update();
                     break;	
 		case OPTIONS:
-                    menu.update();
-                    break;
+			gameSetting.update();
+			break;
 		case QUIT:
 		default:
 			System.exit(0);
@@ -72,6 +79,9 @@ public class Game implements Runnable{
 			break;
 		case PLAYING:
 			playing.draw(g);
+			break;
+		case OPTIONS:
+			gameSetting.draw(g);
 			break;
 		default:
 			break;
@@ -134,5 +144,10 @@ public class Game implements Runnable{
 	public Playing getPlaying() {
 		return playing;
 	}
-    
+        public GameSetting getGameSetting() {
+		return gameSetting;
+	}
+        public AudioSetings getAudioSetings(){
+            return audio;
+        }
 }

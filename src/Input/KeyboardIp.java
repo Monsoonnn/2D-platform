@@ -45,6 +45,9 @@ public class KeyboardIp implements KeyListener {
 		case PLAYING:
 			gamePanel.getGame().getPlaying().keyPressed(e);
 			break;
+		case OPTIONS:
+			gamePanel.getGame().getGameSetting().keyPressed(e);
+			break;
 		default:
 			break;
 		}

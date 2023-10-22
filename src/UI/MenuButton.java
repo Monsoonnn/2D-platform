@@ -16,12 +16,14 @@ public class MenuButton {
 	private BufferedImage[] imgs;
 	private boolean mouseOver, mousePressed;
 	private Rectangle bounds;
+        private String file;
 
-	public MenuButton(int xPos, int yPos, int rowIndex, Gamestate state) {
+	public MenuButton(int xPos, int yPos, int rowIndex, Gamestate state, String file) {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.rowIndex = rowIndex;
 		this.state = state;
+                this.file = file;
 		loadImgs();
 		initBounds();
 	}
@@ -33,9 +35,11 @@ public class MenuButton {
 
 	private void loadImgs() {
 		imgs = new BufferedImage[3];
-		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.MENU_BUTTONS);
-		for (int i = 0; i < imgs.length; i++)
-			imgs[i] = temp.getSubimage(i * B_WIDTH_DEFAULT, rowIndex * B_HEIGHT_DEFAULT, B_WIDTH_DEFAULT, B_HEIGHT_DEFAULT);
+		BufferedImage temp = LoadSave.GetSpriteAtlas(file);
+		for (int i = 0; i < imgs.length; i++){
+                    imgs[i] = temp.getSubimage(i * 100,0, 100,40);  
+                }
+                
 	}
 
 	public void draw(Graphics g) {

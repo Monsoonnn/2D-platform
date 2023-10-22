@@ -39,12 +39,12 @@ public class Menu extends State implements Statemethods {
 	}
 
 	private void loadButtons() {
-		buttons[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAYING);
-		buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS);
-		buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+		buttons[0] = new MenuButton(Game.GAME_WIDTH / 2 - 20, (int) (150 * Game.SCALE), 0, Gamestate.PLAYING,LoadSave.PLAY_BUTTONS);
+		buttons[1] = new MenuButton(Game.GAME_WIDTH / 2 - 20, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS,LoadSave.SETTING_BUTTONS);
+		buttons[2] = new MenuButton(Game.GAME_WIDTH / 2 - 20, (int) (290 * Game.SCALE), 2, Gamestate.QUIT,LoadSave.QUIT_BUTTONS);
 	}
         public void init(){    
-            InputStream is = getClass().getResourceAsStream("/res/bgtest.jpeg");
+            InputStream is = getClass().getResourceAsStream("/res/bg_new.png");
             try {
                 menu = ImageIO.read(is);
                 is.close();
