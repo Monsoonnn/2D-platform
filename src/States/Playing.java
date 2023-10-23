@@ -9,12 +9,13 @@ import entities.Player;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods {
 	private Player player;
 	private LevelManager levelManager;
-        
+        private BufferedImage bg;
         private int xLvlOffset;
 	private int leftBorder = (int) (0.2 * Game.GAME_WIDTH);
 	private int rightBorder = (int) (0.8 * Game.GAME_WIDTH);
@@ -36,6 +37,7 @@ public class Playing extends State implements Statemethods {
 		player = new Player(200, 200,128,128);
 		player.loadLevelData(levelManager.getLevel().getLevelData());
                 pauseOverlay = new PauseOverlay(this);
+                bg = LoadSave.GetSpriteAtlas(LoadSave.GAMEBACKGROUND);
 	}
         
         public void respawnPlayer(){
@@ -68,6 +70,7 @@ public class Playing extends State implements Statemethods {
 
 	@Override
 	public void draw(Graphics g) {
+                g.drawImage(bg, 0,0,1248,672, null);
 		levelManager.draw(g, xLvlOffset);
 		player.render(g, xLvlOffset);
                 if (paused)

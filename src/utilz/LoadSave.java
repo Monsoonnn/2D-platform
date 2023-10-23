@@ -12,9 +12,10 @@ import RPGgame.Game;
 
 public class LoadSave {
         //MENU BG
-        public static final String BACKGROUND = "bg_new.png";
+        public static final String BACKGROUND = "bgtest.jpeg";
+        public static final String GAMEBACKGROUND = "bg_new.png";
 	public static final String LEVEL_ATLAS = "tileset.png";
-	public static final String LEVEL_ONE_DATA = "map/stage2.png";
+	public static final String LEVEL_ONE_DATA = "map/stage7.png";
         //PAUSED OVERLAY
         public static final String PLAY_BUTTONS = "play_but.png";
         public static final String SETTING_BUTTONS = "setting_but.png";
