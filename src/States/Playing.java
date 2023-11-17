@@ -43,7 +43,8 @@ public class Playing extends State implements Statemethods {
 		loadStartLevel();
 	}
         public void loadNextLevel() {
-		resetAll();
+                player.setLvHealth();
+		respawnPlayer();
 		levelManager.loadNextLevel();
 		player.setSpawn(100,300);
 	}
@@ -67,7 +68,18 @@ public class Playing extends State implements Statemethods {
 	}
         
         public void respawnPlayer(){
-            player.resetSpawn();
+                gameOver = false;
+		paused = false;
+		lvlCompleted = false;
+                player.resetSpawn();
+                enemyManager.resetAllEnemies();
+        }
+        public void respawnLv(){
+                gameOver = false;
+		paused = false;
+		lvlCompleted = false;
+                player.resetLv();
+                enemyManager.resetAllEnemies();
         }
         private void checkCloseToBorder() {
 		int playerX = (int) player.getHitBox().x;

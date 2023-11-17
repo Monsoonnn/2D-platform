@@ -56,6 +56,7 @@ public class Player extends Entity{
 
     private int maxHealth = 100;
     private int currentHealth = maxHealth;
+    private int currentLvHealth = currentHealth;
     private int healthWidth = healthBarWidth;
         
     // AttackBox
@@ -76,7 +77,6 @@ public class Player extends Entity{
     public Player(float x, float y,int width, int height, Playing playing) {
         super(x,y,width,height);
         LoadAnimation();
-        this.currentHealth = maxHealth;
         this.playing = playing;
         initHitBox(x,y, 18 * Game.SCALE, 32 * Game.SCALE);
         initAttackBox();
@@ -436,6 +436,23 @@ public class Player extends Entity{
 		if (!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
     }
+    public void resetLv() {
+		resetPosBoolean();
+		inAir = false;
+		attack_1 = false;
+                attack_2 = false;
+		moving = false;
+                playerAction = IDLE;
+                currentHealth = currentLvHealth;
+
+                flipX = 0;
+                flipW = 1;
+		hitbox.x = x;
+		hitbox.y = y;
+
+		if (!IsEntityOnFloor(hitbox, lvlData))
+			inAir = true;
+   }
    public void resetAll() {
 		resetPosBoolean();
 		inAir = false;
@@ -453,6 +470,10 @@ public class Player extends Entity{
 		if (!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
    }
+
+    public void setLvHealth() {
+        currentLvHealth = currentHealth;
+    }
 
    
    
