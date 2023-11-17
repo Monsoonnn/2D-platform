@@ -1,7 +1,15 @@
 package utilz;
 
 import RPGgame.Game;
+import entities.Goblin;
+import entities.Skeleton;
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import static utilz.Constants.EnemyConstants.GOBLIN;
+import static utilz.Constants.EnemyConstants.SKELETON;
+import static utilz.LoadSave.GetSpriteAtlas;
 
 
 
@@ -31,6 +39,14 @@ public class HelpMethods {
 			return true;
 		return false;
 	}
+        public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
+		int value = lvlData[yTile][xTile];
+
+		if (value >= 48 || value < 0 || value != 11)
+			return true;
+		return false;
+	}
+        
 
 	public static float GetEntityXPosWall(Rectangle2D.Float hitbox, float xSpeed) {
 		int currentTile = (int) (hitbox.x / Game.TILES_SIZE);
@@ -45,12 +61,15 @@ public class HelpMethods {
 	}
 
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
-		int currentTile = (int) (hitbox.y / Game.TILES_SIZE);
+                int difYandHeight = (int) hitbox.height;
+                 while (difYandHeight > 32)
+                    difYandHeight-=32;
+                int currentTile = (int) ((hitbox.y + hitbox.height - difYandHeight) / Game.TILES_SIZE);
 		if (airSpeed > 0) {
 			// Falling - touching floor
 			int tileYPos = currentTile * Game.TILES_SIZE;
 			int yOffset = (int) (Game.TILES_SIZE - hitbox.height);
-			return tileYPos + yOffset + Game.TILES_SIZE - 1;
+			return tileYPos + yOffset - 1;
 		} else
 			// Jumping
 			return currentTile * Game.TILES_SIZE;
@@ -64,6 +83,73 @@ public class HelpMethods {
 				return false;
 
 		return true;
+
+	}
+        public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		if (xSpeed > 0)
+			return IsSolid(hitbox.x + hitbox.width + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+		else
+			return IsSolid(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+	}
+
+	public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
+		for (int i = 0; i < xEnd - xStart; i++) {
+			if (IsTileSolid(xStart + i, y, lvlData))
+				return false;
+			if (!IsTileSolid(xStart + i, y + 1, lvlData))
+				return false;
+		}
+
+		return true;
+	}
+
+	public static boolean IsSightClear(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
+		int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
+		int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+
+		if (firstXTile > secondXTile)
+			return IsAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
+		else
+			return IsAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
+
+	}
+        	public static int[][] GetLevelData(BufferedImage img) {
+		
+		int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getRed();
+				if (value >= 48)
+					value = 0;
+				lvlData[j][i] = value;
+			}
+		return lvlData;
+
+	}
+                public static ArrayList<Goblin> GetGoblins(BufferedImage img) {
+		ArrayList<Goblin> list = new ArrayList<>();
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getGreen();
+				if (value == GOBLIN)
+					list.add(new Goblin(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+			}
+		return list;
+
+	}
+        public static ArrayList<Skeleton> GetSkeletons(BufferedImage img) {
+		ArrayList<Skeleton> list = new ArrayList<>();
+		for (int j = 0; j < img.getHeight(); j++)
+			for (int i = 0; i < img.getWidth(); i++) {
+				Color color = new Color(img.getRGB(i, j));
+				int value = color.getGreen();
+				if (value == SKELETON)
+					list.add(new Skeleton(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+			}
+		return list;
 
 	}
 

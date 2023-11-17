@@ -10,6 +10,7 @@ import RPGgame.Game;
 import UI.AudioSetings;
 import UI.PauseButton;
 import UI.UrmButton;
+import entities.Player;
 import utilz.LoadSave;
 import static utilz.Constants.UI.URMButtons.*;
 import static utilz.LoadSave.URM_HOME;
@@ -55,7 +56,6 @@ public class GameSetting extends State implements Statemethods {
 	public void draw(Graphics g) {
 		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
 		g.drawImage(optionsBackgroundImg, bgX, bgY, 400, 500, null);
-
 		menuB.draw(g);
 		audioOptions.draw(g);
 
@@ -77,8 +77,11 @@ public class GameSetting extends State implements Statemethods {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (isIn(e, menuB)) {
-			if (menuB.isMousePressed())
-				Gamestate.state = Gamestate.MENU;
+			if (menuB.isMousePressed()){
+                            Gamestate.state = Gamestate.MENU;
+                            
+                        }
+				
 		} else
 			audioOptions.mouseReleased(e);
 

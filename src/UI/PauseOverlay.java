@@ -1,6 +1,7 @@
 
 package UI;
 
+import Levels.LevelManager;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -17,7 +18,9 @@ import static utilz.LoadSave.URM_BACK;
 import static utilz.LoadSave.URM_HOME;
 import static utilz.LoadSave.URM_REPLAY;
 import static States.Playing.*;
+import entities.Enemy;
 import static entities.Player.*;
+import static Levels.LevelManager.*;
 public class PauseOverlay {
 
 	private Playing playing;
@@ -27,8 +30,11 @@ public class PauseOverlay {
 	private UrmButton menuB, replayB, unpauseB;
 	private VolumeButton volumeButton;
         private AudioSetings audioSetings;
-	public PauseOverlay(Playing playing) {
+        private Enemy enemy;
+        private LevelManager levelManager;
+	public PauseOverlay(Playing playing, LevelManager lvl) {
 		this.playing = playing;
+                this.levelManager = lvl;
                 audioSetings = playing.getGame().getAudioSetings();
 		loadBackground();
 		createUrmButtons();
@@ -85,8 +91,10 @@ public class PauseOverlay {
 	}
 
 	public void mousePressed(MouseEvent e) {
-		if (isIn(e, menuB))
-			menuB.setMousePressed(true);
+		if (isIn(e, menuB)){
+                    menuB.setMousePressed(true);
+                }
+			
 		else if (isIn(e, replayB))
 			replayB.setMousePressed(true);
 		else if (isIn(e, unpauseB))
@@ -100,13 +108,17 @@ public class PauseOverlay {
 			if (menuB.isMousePressed()) {
 				Gamestate.state = Gamestate.MENU;
                                 playing.respawnPlayer();
+                                levelManager.resetLevel();
+                                playing.resetAll();
+                                levelManager.buildLevel();
 				playing.unpauseGame();
 			}
 		} else if (isIn(e, replayB)) {
 			if (replayB.isMousePressed()) {
 				playing.respawnPlayer();
 				playing.unpauseGame();
-			}
+                                playing.resetAll();
+                        }
 		} else if (isIn(e, unpauseB)) {
 			if (unpauseB.isMousePressed())
 				playing.unpauseGame();

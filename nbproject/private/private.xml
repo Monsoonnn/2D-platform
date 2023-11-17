@@ -3,17 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Player.java</file>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/MenuButton.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/Gamestate.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/RPGgame/GamePanel.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/Menu.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Skeleton.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/Playing.java</file>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/LoadSave.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/Statemethods.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/RPGgame/Game.java</file>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/UrmButton.java</file>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/VolumeButton.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/HelpMethods.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/Levels/Level.java</file>
-            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/AudioSetings.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Enemy.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/RPGgame/GameWindow.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/GameSetting.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/Constants.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Player.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/utilz/LoadSave.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/Goblin.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/entities/EnemyManager.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/Levels/LevelManager.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/States/State.java</file>
+            <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/PauseOverlay.java</file>
             <file>file:/C:/Users/Nguyen%20Quang%20Anh/Documents/NetBeansProjects/RPGgame/src/UI/PauseButton.java</file>
         </group>
     </open-files>

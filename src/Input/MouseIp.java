@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import States.Gamestate;
 import RPGgame.GamePanel;
+import States.Playing;
 
 public class MouseIp implements MouseListener, MouseMotionListener {
 
@@ -70,6 +71,7 @@ public class MouseIp implements MouseListener, MouseMotionListener {
 		switch (Gamestate.state) {
 		case MENU:
 			gamePanel.getGame().getMenu().mousePressed(e);
+ 
 			break;
 		case PLAYING:
 			gamePanel.getGame().getPlaying().mousePressed(e);

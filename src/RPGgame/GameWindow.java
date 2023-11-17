@@ -11,7 +11,7 @@ public class GameWindow extends JFrame{
     private JFrame jframe;
     public GameWindow(GamePanel gamePanel) {
         jframe = new JFrame();
-        jframe.setTitle("Journey");
+        jframe.setTitle("BTL JAVA");
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.add(gamePanel);
